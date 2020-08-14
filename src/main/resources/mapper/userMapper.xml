@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanghao.picturesrename.dao.UserDao">
+    <select id="getUserInfo" resultType="com.wanghao.picturesrename.entity.User">
+        select USER_ID,user_name,id_no from (
+            select row_.*, rownum rn from (
+                select i.USER_ID,i.name as user_name, i.idno as id_no from
+                t_stkkh_cust_info    i,
+                t_stkkh_cust_oareq   o
+                where i.user_id = o.user_id
+                and o.open_state = 'g'
+                and i.status='0'
+                and i.CREATE_DATE <![CDATA[<to_date('2020-08-06', 'yyyy-mm-dd') ]]>
+                order by o.create_date desc
+            ) row_
+        )
+        where <![CDATA[rn >=(#{page} - 1) * #{pageSize} +1 and rn <= #{page} * #{pageSize} ]]>
+    </select>
+</mapper>

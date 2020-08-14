@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanghao.picturesrename.dao.VideoDao">
+    <select id="getVideoListByIdNo" resultType="com.wanghao.picturesrename.entity.Video">
+        select w.USER_ID,f.file_addr as url, '5' as type
+        from t_base_upload_file f,t_stkkh_witnessvideo w
+        where w.secret_key=f.upload_id
+          and w.user_id=#{userId}
+        order by w.CREATE_DATE desc
+    </select>
+</mapper>

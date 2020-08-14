@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanghao.picturesrename.dao.PicDao">
+    <select id="getPictures" resultType="com.wanghao.picturesrename.entity.Picture">
+        select w.USER_ID,f.file_addr as url, w.media_code as type from
+            t_base_upload_file   f,
+            t_stkkh_cust_images  w
+        where w.secret_key = f.upload_id
+            and w.media_code =#{type}
+            and w.USER_ID=#{userId}
+        order by w.CREATE_DATE desc
+    </select>
+
+    <select id="getPolicePhoto" resultType="com.wanghao.picturesrename.entity.Picture">
+        select i.USER_ID,f.file_addr as url,'1' as type
+        from t_base_upload_file   f,
+             t_stkkh_idno_info    w,
+             t_stkkh_cust_info    i
+        where w.secret_key = f.upload_id
+        and i.idno = w.citizen_id_number
+        and w.create_date is not null
+        and i.IDNO= #{idNo}
+        order by w.CREATE_DATE desc
+    </select>
+</mapper>

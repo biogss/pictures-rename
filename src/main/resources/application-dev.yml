@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:oracle:thin:@10.0.209.111:1521:orcl
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      username: FXCSTK_ZT
+      password: FXCSTK_ZT
+      name: pictures-rename
+      max-active: 10
+      initial-size: 10
+      min-idle: 10
+      max-wait: 60000
+      min-evictable-idle-time-millis: 120000
+      validation-query: select 1 from dual
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+logging:
+  level:
+    root: info
+  file:
+    name: detail.log
+    path: /tmp/log
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.wanghao.picturesrename.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+picture:
+  name:
+    totalPage: 10
+    pageSize: 10
+    sourceFilePrefix: /hxspace/production/app/thinkive-base-file-web/upload_file/safty
+    newFilePrefix: /tmp/pic/
+    business: read-file   #pic-copy-rename  read-file 两种模式
+
+
