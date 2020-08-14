@@ -49,6 +49,5 @@ public class PictureRename {
 				}
 			}
 		}
-		logger.info("done！！！！！！！！！！！！！！！！！！！！！");
 	}
 }
