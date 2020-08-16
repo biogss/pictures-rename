@@ -1,6 +1,5 @@
 package com.wanghao.picturesrename.function;
 
-import com.wanghao.picturesrename.DataPage;
 import com.wanghao.picturesrename.config.PicConfig;
 import com.wanghao.picturesrename.entity.Picture;
 import com.wanghao.picturesrename.entity.User;
@@ -15,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 读取用户所有信息是否存在
@@ -27,6 +23,12 @@ import java.util.concurrent.TimeUnit;
 public class ReadFile implements Runnable{
 
 	private final Logger logger = LoggerFactory.getLogger(ReadFile.class);
+
+	private static AtomicInteger pageSerial;
+
+	static {
+		pageSerial = new AtomicInteger(0);
+	}
 
 	@Autowired
 	VideoService videoService;
@@ -49,8 +51,9 @@ public class ReadFile implements Runnable{
 
 	@Override
 	public void run() {
-		int page = DataPage.getPage();
-		int pageSize = DataPage.getPageSize();
+	    pageSerial.incrementAndGet();
+		int page = pageSerial.get();
+		int pageSize = picConfig.getPageSize();
 		String sourceFilePrefix = picConfig.getSourceFilePrefix();
 		StringBuilder sourceFileUrl = new StringBuilder();
 		//获取开户成功的用户信息
