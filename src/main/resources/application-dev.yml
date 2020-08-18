@@ -31,7 +31,7 @@ mybatis:
 
 picture:
   name:
-    totalPage: 10
+    totalPage: 50
     pageSize: 10
     sourceFilePrefix: /hxspace/production/app/thinkive-base-file-web/upload_file/safty
     newFilePrefix: /tmp/pic/

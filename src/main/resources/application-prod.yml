@@ -6,9 +6,9 @@ spring:
       username: FXCSTK_ZT
       password: FXCSTK_ZT
       name: pictures-rename
-      max-active: 10
-      initial-size: 10
-      min-idle: 10
+      max-active: 100
+      initial-size: 20
+      min-idle: 20
       max-wait: 60000
       min-evictable-idle-time-millis: 120000
       validation-query: select 1 from dual
@@ -18,7 +18,7 @@ spring:
       time-between-eviction-runs-millis: 60000
 logging:
   level:
-    root: error
+    root: info
   file:
     name: detail.log
     path: /tmp/log
@@ -31,7 +31,7 @@ mybatis:
 
 picture:
   name:
-    totalPage: 100
+    totalPage: 20
     pageSize: 100
     sourceFilePrefix: /hxspace/production/app/thinkive-base-file-web/upload_file/safty
     newFilePrefix: /tmp/pic/

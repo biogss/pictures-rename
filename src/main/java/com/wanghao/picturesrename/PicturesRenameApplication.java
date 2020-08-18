@@ -41,6 +41,7 @@ public class PicturesRenameApplication {
 			for (int page = 0; page < totalPage; page++) {
 				poolExecutor.execute(readFile);
 			}
+			poolExecutor.shutdown();
 		}
 		logger.info("done！！！！！！！！！！！！！！！！！！！！！");
 	}

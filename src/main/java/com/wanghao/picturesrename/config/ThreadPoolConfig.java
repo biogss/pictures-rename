@@ -14,7 +14,7 @@ public class ThreadPoolConfig {
 
 	@Bean("taskExecutor")
 	public ThreadPoolExecutor getThreadPoolExecutor() {
-		ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(10, 20,
+		ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(40, 50,
 				60000, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 		return poolExecutor;
 	}
